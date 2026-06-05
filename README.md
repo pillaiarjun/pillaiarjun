@@ -50,7 +50,7 @@ Architecture:
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/arjunpillai008)
 [![Email](https://img.shields.io/badge/Email-EA4335?style=flat&logo=gmail&logoColor=white)](mailto:arjun.pillai@berkeley.edu)
-[![ClaimDelta](https://img.shields.io/badge/ClaimDelta-009688?style=flat&logo=googlechrome&logoColor=white)](https://app.claimdelta.com)## 
+[![ClaimDelta](https://img.shields.io/badge/ClaimDelta-009688?style=flat&logo=googlechrome&logoColor=white)](https://app.claimdelta.com) 
 
 <!--
 **pillaiarjun/pillaiarjun** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.

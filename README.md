@@ -1,6 +1,6 @@
 # Arjun Pillai
 
-Data scientist building end-to-end systems, from cloud pipelines to production LLM applications.
+Data scientist building end-to-end systems — from cloud pipelines to production LLM applications.
 B.A. Data Science, UC Berkeley · U.S. Permanent Resident
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
@@ -30,6 +30,23 @@ Built the full stack from scratch:
 
 ---
 
+### 🏨 RuralWatch — [github.com/pillaiarjun/ruralwatch](https://github.com/pillaiarjun/ruralwatch)
+
+End-to-end ML pipeline that predicts which rural US hospitals are at risk of financial distress or permanent closure within 1–3 years, using publicly available CMS cost report data. Built in direct response to a December 2025 systematic review in BMC Health Services Research that examined every published study of rural hospital closures from 2013–2024 and explicitly called for an AI-driven early warning system — finding that no such system yet existed.
+
+Over 140 rural hospitals have permanently closed since 2010. RuralWatch makes every prediction auditable: each at-risk hospital gets a SHAP waterfall explanation showing which financial ratios drove its risk score, transparent enough for state health department use.
+
+Architecture:
+- **Data**: Bronze → Silver → Gold Medallion pipeline in Delta Lake via PySpark; star schema (fact + 4 dimension tables) in Gold layer
+- **Features**: 10 engineered financial ratios from CMS cost reports (2011–2022), joined with USDA rural codes and UNC Sheps closure registry
+- **Model**: XGBoost with SMOTE and temporal train/test split — Val ROC-AUC 0.8789
+- **Streaming**: Kafka producer/consumer simulating quarterly CMS updates
+- **Serving**: FastAPI endpoint + Streamlit risk monitor dashboard
+
+`PySpark` `Delta Lake` `XGBoost` `MLflow` `SHAP` `Kafka` `FastAPI` `Streamlit`
+
+---
+
 ### ⚖️ RecidivAI — [github.com/pillaiarjun/recidivai](https://github.com/pillaiarjun/recidivai)
 
 Transparent, auditable ML pipeline for violent recidivism risk prediction built on the ProPublica COMPAS dataset. A direct response to ProPublica's 2016 investigation finding that a widely-used black-box algorithm was twice as likely to incorrectly flag Black defendants as high-risk.
@@ -50,19 +67,4 @@ Architecture:
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/arjunpillai008)
 [![Email](https://img.shields.io/badge/Email-EA4335?style=flat&logo=gmail&logoColor=white)](mailto:arjun.pillai@berkeley.edu)
-[![ClaimDelta](https://img.shields.io/badge/ClaimDelta-009688?style=flat&logo=googlechrome&logoColor=white)](https://app.claimdelta.com) 
-
-<!--
-**pillaiarjun/pillaiarjun** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+[![ClaimDelta](https://img.shields.io/badge/ClaimDelta-009688?style=flat&logo=googlechrome&logoColor=white)](https://app.claimdelta.com)

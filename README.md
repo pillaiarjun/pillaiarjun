@@ -1,6 +1,6 @@
 # Arjun Pillai
 
-Data scientist building end-to-end systems — from cloud pipelines to production LLM applications.
+Data scientist building end-to-end systems, from cloud pipelines to production LLM applications.
 B.A. Data Science, UC Berkeley · U.S. Permanent Resident
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)

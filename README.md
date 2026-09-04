@@ -1,65 +1,56 @@
 # Arjun Pillai
 
-Data scientist building end-to-end systems — from cloud pipelines to production LLM applications.
-B.A. Data Science, UC Berkeley · U.S. Permanent Resident
+AI Engineer at Hexaware Technologies in Jersey City. I build LLM products end to end: data pipelines, model selection, prompt and evaluation design, and the application on top. Most of my own work is in healthcare and public-interest domains, where a wrong answer can cost someone money or care.
+
+B.A. Data Science, UC Berkeley. Databricks Certified Data Engineer Associate and Generative AI Engineer Associate.
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![PySpark](https://img.shields.io/badge/PySpark-E25A1C?style=flat&logo=apachespark&logoColor=white)
 ![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat&logo=postgresql&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat&logo=amazonaws&logoColor=white)
 ![Databricks](https://img.shields.io/badge/Databricks-FF3621?style=flat&logo=databricks&logoColor=white)
-![Snowflake](https://img.shields.io/badge/Snowflake-29B5E8?style=flat&logo=snowflake&logoColor=white)
+![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoftazure&logoColor=white)
 ![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=flat&logo=mlflow&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
 
 ---
 
-## Featured projects
+## Projects
 
-### 🏥 ClaimDelta — [app.claimdelta.com](https://app.claimdelta.com)
+### RuralWatch — [github.com/pillaiarjun/ruralwatch](https://github.com/pillaiarjun/ruralwatch)
 
-HIPAA-compliant B2B SaaS platform that automates detection and recovery of payer underpayments for independent medical practices. Targets a $150K–$360K annual revenue leak caused by insurers underpaying on contracted rates — a problem most practices never detect because they lack the tooling to audit every claim against their contract.
+Predicts which rural US hospitals are at risk of financial distress or closure within one to three years, using public CMS cost report data. Built in response to a December 2025 systematic review in BMC Health Services Research, which examined every published study of rural hospital closures from 2013 to 2024 and found that no ML early-warning system existed. Over 140 rural hospitals have closed since 2010. Every prediction comes with a SHAP waterfall showing which financial ratios drove the score, so a state health department could audit it.
 
-Built the full stack from scratch:
-- **Parser**: Deterministic X12 835 ERA parser handling three major clearinghouse dialects (Availity, Waystar, Change Healthcare)
-- **AI layer**: LLM-powered extraction of payer contract fee schedules, joined against ERA data to generate ranked underpayment worklists
-- **Backend**: FastAPI + PostgreSQL on AWS (S3, RDS, EC2) with end-to-end HIPAA compliance — encryption at rest, IAM isolation, automated PHI deletion
-- **Frontend**: React SPA with Stripe billing and SendGrid magic-link authentication
-
-`Python` `FastAPI` `PostgreSQL` `React` `AWS` `Stripe` `LLM` `HIPAA`
-
----
-
-### 🏨 RuralWatch — [github.com/pillaiarjun/ruralwatch](https://github.com/pillaiarjun/ruralwatch)
-
-End-to-end ML pipeline that predicts which rural US hospitals are at risk of financial distress or permanent closure within 1–3 years, using publicly available CMS cost report data. Built in direct response to a December 2025 systematic review in BMC Health Services Research that examined every published study of rural hospital closures from 2013–2024 and explicitly called for an AI-driven early warning system — finding that no such system yet existed.
-
-Over 140 rural hospitals have permanently closed since 2010. RuralWatch makes every prediction auditable: each at-risk hospital gets a SHAP waterfall explanation showing which financial ratios drove its risk score, transparent enough for state health department use.
-
-Architecture:
-- **Data**: Bronze → Silver → Gold Medallion pipeline in Delta Lake via PySpark; star schema (fact + 4 dimension tables) in Gold layer
-- **Features**: 10 engineered financial ratios from CMS cost reports (2011–2022), joined with USDA rural codes and UNC Sheps closure registry
-- **Model**: XGBoost with SMOTE and temporal train/test split — Val ROC-AUC 0.8789
-- **Streaming**: Kafka producer/consumer simulating quarterly CMS updates
-- **Serving**: FastAPI endpoint + Streamlit risk monitor dashboard
+- Bronze, Silver, and Gold Delta Lake pipeline in PySpark, with a star schema in the Gold layer
+- 10 engineered financial ratios from CMS cost reports (2011 to 2022), joined with USDA rural codes and the UNC Sheps closure registry
+- XGBoost with SMOTE and a temporal train/test split; validation ROC-AUC 0.8789
+- Kafka producer and consumer simulating quarterly CMS updates
+- FastAPI endpoint and Streamlit risk dashboard
 
 `PySpark` `Delta Lake` `XGBoost` `MLflow` `SHAP` `Kafka` `FastAPI` `Streamlit`
 
----
+### RecidivAI — [github.com/pillaiarjun/recidivai](https://github.com/pillaiarjun/recidivai)
 
-### ⚖️ RecidivAI — [github.com/pillaiarjun/recidivai](https://github.com/pillaiarjun/recidivai)
+Transparent, auditable recidivism risk model on the ProPublica COMPAS dataset. ProPublica's 2016 investigation found that a widely used black-box algorithm was twice as likely to wrongly flag Black defendants as high risk. This project is the auditable alternative: every prediction includes a SHAP explanation of which features moved the score and by how much, alongside a fairness analysis across racial groups and a discussion of the Chouldechova impossibility result.
 
-Transparent, auditable ML pipeline for violent recidivism risk prediction built on the ProPublica COMPAS dataset. A direct response to ProPublica's 2016 investigation finding that a widely-used black-box algorithm was twice as likely to incorrectly flag Black defendants as high-risk.
-
-Every prediction includes a SHAP waterfall explanation showing exactly which features drove the score and by how much. Includes explicit fairness analysis across racial groups and a discussion of the Chouldechova impossibility result.
-
-Architecture:
-- **Data**: Bronze → Silver → Gold Medallion pipeline in Delta Lake via PySpark
-- **Models**: Logistic Regression, Random Forest, GBM — tracked and versioned in MLflow
-- **Explainability**: SHAP LinearExplainer for per-prediction transparency
-- **Serving**: FastAPI REST endpoint + Streamlit dashboard
+- Bronze, Silver, and Gold Delta Lake pipeline in PySpark
+- Logistic regression, random forest, and gradient boosting, tracked and versioned in MLflow
+- SHAP LinearExplainer for per-prediction explanations
+- FastAPI endpoint and Streamlit dashboard
 
 `PySpark` `Delta Lake` `MLflow` `SHAP` `Scikit-learn` `FastAPI` `Streamlit`
+
+### Block Watch — [github.com/pillaiarjun/Blockwatch](https://github.com/pillaiarjun/Blockwatch)
+
+Point it at one NYC DOT traffic camera and it tells you, in plain English, what is happening on that block right now. An object detection model counts vehicles and pedestrians in each frame, the app keeps a minute-by-minute history of those counts, and Gemini narrates the trend once a minute on a live dashboard. Built at AI Tinkerers NYC Vision Hack v.2.
+
+`Python` `Flask` `Gemini` `Object detection`
+
+### Vet Benefits Help (private, pre-launch)
+
+Free tool that helps U.S. veterans, especially those with less-than-honorable discharges, understand which of roughly 50 federal VA benefit programs they may qualify for and what to do next. Instead of a binary eligibility verdict, which only the VA can give, it returns probabilistic scoring, a plain-English narrative grounded in published VA policy, and personalized next steps. The character-of-discharge scorer is calibrated through a Databricks pipeline with model weights in MLflow. The repo stays private until VA validation and accredited-attorney legal review are complete.
+
+`Python` `FastAPI` `React` `PostgreSQL` `Databricks` `MLflow` `Claude API`
 
 ---
 
@@ -67,4 +58,3 @@ Architecture:
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/arjunpillai008)
 [![Email](https://img.shields.io/badge/Email-EA4335?style=flat&logo=gmail&logoColor=white)](mailto:arjun.pillai@berkeley.edu)
-[![ClaimDelta](https://img.shields.io/badge/ClaimDelta-009688?style=flat&logo=googlechrome&logoColor=white)](https://app.claimdelta.com)
